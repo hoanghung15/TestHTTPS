@@ -13,12 +13,12 @@
         FacebookAuthProvider,
       } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-      // 2️⃣ Cấu hình Firebase (Thay YOUR_CONFIG bằng cấu hình thật của bạn)
+      // 2️⃣ Cấu hình Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyAP57nrAttT8xBzp9iRm5ThIXlJyONFDMU",
         authDomain: "tinamusic-49a01.firebaseapp.com",
         projectId: "tinamusic-49a01",
-        storageBucket: "tinamusic-49a01.firebasestorage.app",
+        storageBucket: "tinamusic-49a01.appspot.com",
         messagingSenderId: "12788495774",
         appId: "1:12788495774:web:8891167068513b507f528f",
         measurementId: "G-FRX39SJ8ER",
@@ -29,22 +29,21 @@
       const auth = getAuth(app);
       const provider = new FacebookAuthProvider();
       provider.addScope("public_profile");
-provider.addScope("email");
+      provider.addScope("email");
 
       // 4️⃣ Hàm đăng nhập với Facebook
-      window.signInWithFacebook = function () {
-        signInWithPopup(auth, provider)
-          .then((result) => {
-            console.log(result.user);
-            const user = result.user;
-            alert(
-              `Đăng nhập thành công!\nTên: ${user.displayName}\nEmail: ${user.email}`
-            );
-          })
-          .catch((error) => {
-            console.error("Lỗi đăng nhập:", error);
-            alert("Lỗi đăng nhập: " + error.message);
-          });
+      window.signInWithFacebook = async function () {
+        try {
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+          alert(
+            `✅ Đăng nhập thành công!\n👤 Tên: ${user.displayName}\n📧 Email: ${user.email}`
+          );
+          console.log("User info:", user);
+        } catch (error) {
+          console.error("❌ Lỗi đăng nhập:", error);
+          alert("Lỗi đăng nhập: " + error.message);
+        }
       };
     </script>
 
@@ -55,13 +54,14 @@ provider.addScope("email");
         margin-top: 50px;
       }
       button {
-        padding: 10px 20px;
-        font-size: 16px;
+        padding: 12px 24px;
+        font-size: 18px;
         background-color: #1877f2;
         color: white;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
+        transition: 0.3s;
       }
       button:hover {
         background-color: #165dbb;
