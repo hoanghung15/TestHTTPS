@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập với Facebook</title>
+    <script type="module">
+      // 1️⃣ Import Firebase SDK
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getAuth,
+        signInWithPopup,
+        FacebookAuthProvider,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+      // 2️⃣ Cấu hình Firebase (Thay YOUR_CONFIG bằng cấu hình thật của bạn)
+      const firebaseConfig = {
+        apiKey: "AIzaSyAP57nrAttT8xBzp9iRm5ThIXlJyONFDMU",
+        authDomain: "tinamusic-49a01.firebaseapp.com",
+        projectId: "tinamusic-49a01",
+        storageBucket: "tinamusic-49a01.firebasestorage.app",
+        messagingSenderId: "12788495774",
+        appId: "1:12788495774:web:8891167068513b507f528f",
+        measurementId: "G-FRX39SJ8ER",
+      };
+
+      // 3️⃣ Khởi tạo Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const provider = new FacebookAuthProvider();
+
+      // 4️⃣ Hàm đăng nhập với Facebook
+      window.signInWithFacebook = function () {
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            console.log(result.user);
+            const user = result.user;
+            alert(
+              `Đăng nhập thành công!\nTên: ${user.displayName}\nEmail: ${user.email}`
+            );
+          })
+          .catch((error) => {
+            console.error("Lỗi đăng nhập:", error);
+            alert("Lỗi đăng nhập: " + error.message);
+          });
+      };
+    </script>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #1877f2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #165dbb;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Đăng nhập với Facebook</h2>
+    <button onclick="signInWithFacebook()">Đăng nhập với Facebook</button>
+  </body>
+</html>
