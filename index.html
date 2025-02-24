@@ -35,11 +35,13 @@
         try {
           const result = await signInWithPopup(auth, provider);
           const user = result.user;
+          const credential = FacebookAuthProvider.credentialFromResult(result);
+          const accessToken = credential.accessToken; 
           alert(
             `✅ Đăng nhập thành công!\n👤 Tên: ${user.displayName}\n📧 Email: ${user.email}`
           );
           console.log("User info:", user);
-
+          console.log("accessToken",accessToken)
           // Chuyển hướng sang test.html
           window.location.href = "test.html";
         } catch (error) {
