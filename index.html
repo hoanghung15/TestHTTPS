@@ -38,19 +38,18 @@
           const credential = FacebookAuthProvider.credentialFromResult(result);
           const accessToken = credential.accessToken; 
           alert(
-            `✅ Đăng nhập thành công!\n👤 Tên: ${user.displayName}\n📧 Email: ${user.email}`
+            `✅ Đăng nhập thành công!\n👤 Tên: ${user.displayName}\n📧 Email: ${user.email} \n AccessToken: ${accessToken}`
           );
           console.log("User info:", user);
           console.log("accessToken",accessToken)
           // Chuyển hướng sang test.html
-          window.location.href = "test.html";
+      
         } catch (error) {
           console.error("❌ Lỗi đăng nhập:", error);
           alert("Lỗi đăng nhập: " + error.message);
         }
       };
     </script>
-
     <style>
       body {
         font-family: Arial, sans-serif;
